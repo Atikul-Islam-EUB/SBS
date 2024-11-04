@@ -1,0 +1,93 @@
+import java.util.ArrayList;
+import java.util.List;
+
+// Account Class (superclass)
+class Account {
+    String accountNumber;
+
+    // Constructor
+    Account(String accountNumber) {
+        this.accountNumber = accountNumber;
+    }
+
+    // Method to display account details
+    void displayAccountInfo() {
+        System.out.println("Account Number: " + accountNumber);
+    }
+}
+
+// Customer Class
+class Customer {
+    String customerId;
+    String name;
+    List<Account> accounts;
+
+    // Constructor
+    Customer(String customerId, String name) {
+        this.customerId = customerId;
+        this.name = name;
+        this.accounts = new ArrayList<>();
+    }
+
+    // Method to add an account to the customer
+    void addAccount(Account account) {
+        accounts.add(account);
+        System.out.println("Account added for " + name);
+    }
+
+    // Method to display customer information
+    void displayCustomerInfo() {
+        System.out.println("Customer ID: " + customerId + ", Name: " + name);
+        for (Account account : accounts) {
+            account.displayAccountInfo();
+        }
+    }
+}
+
+// Bank Class
+class Bank {
+    List<Customer> customers;
+
+    // Constructor
+    Bank() {
+        customers = new ArrayList<>();
+    }
+
+    // Method to add a customer to the bank
+    void addCustomer(Customer customer) {
+        customers.add(customer);
+        System.out.println("Customer added: " + customer.name);
+    }
+
+    // Method to display all customers
+    void displayAllCustomers() {
+        System.out.println("Customers in the bank:");
+        for (Customer customer : customers) {
+            customer.displayCustomerInfo();
+        }
+    }
+
+    // Main method for the Simple Banking System
+    public static void main(String[] args) {
+        Bank bank = new Bank();
+
+        // Create customers
+        Customer customer1 = new Customer("C001", "Alice");
+        Customer customer2 = new Customer("C002", "Bob");
+
+        // Add customers to the bank
+        bank.addCustomer(customer1);
+        bank.addCustomer(customer2);
+
+        // Create accounts for customers
+        Account account1 = new Account("A001");
+        Account account2 = new Account("A002");
+
+        // Add accounts to customers
+        customer1.addAccount(account1);
+        customer2.addAccount(account2);
+
+        // Display all customers and their accounts
+        bank.displayAllCustomers();
+    }
+}
